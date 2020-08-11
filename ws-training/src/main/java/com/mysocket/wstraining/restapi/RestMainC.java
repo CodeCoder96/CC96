@@ -1,10 +1,10 @@
 package com.mysocket.wstraining.restapi;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 
-import com.mysocket.wstraining.restapi.models.Job;
+
 import com.mysocket.wstraining.restapi.models.Root;
 
 public class RestMainC {
