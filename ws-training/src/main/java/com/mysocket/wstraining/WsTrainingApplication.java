@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
+
 import com.mysocket.wstraining.restapi.RestMainC;
 
 
@@ -15,9 +16,8 @@ public class WsTrainingApplication {
 
 	
 	public static void main(String[] args) {
+		
 		SpringApplication.run(WsTrainingApplication.class, args);
-		
-		
 		
 	}
 	
@@ -26,6 +26,9 @@ public class WsTrainingApplication {
 		RestMainC restApi = new RestMainC();
 		restApi.showMeData();
 		
+		
 	}
+	
+	
 	
 }

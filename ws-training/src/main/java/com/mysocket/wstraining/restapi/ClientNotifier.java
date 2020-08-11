@@ -5,11 +5,15 @@ import java.util.List;
 import com.mysocket.wstraining.restapi.models.Job;
 import com.mysocket.wstraining.restapi.models.Root;
 
+
+// -1 : Servis yeni başladı
+// 1 : Değerler Aynı
+// 0 : Değerler farklı clientlere bildir
 public class ClientNotifier {
 
 	public int isNotifiable(List<Root> oldData, List<Root> newData) {
 		int toggle = 0;
-		if (4 != oldData.size()) {
+		if (null == oldData) {
 			return -1;
 		}
 		for (int i = 0; i < oldData.size(); i++) {
@@ -36,5 +40,11 @@ public class ClientNotifier {
 	
 	public void nofityClients() {
 		
+	}
+	
+	
+	public static String notifyClients(String notice) {
+		notice="Merhaba Dünya";
+		return notice;
 	}
 }

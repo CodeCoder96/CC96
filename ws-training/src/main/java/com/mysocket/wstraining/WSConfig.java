@@ -8,14 +8,13 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 
 @Configuration
 @EnableWebSocketMessageBroker
-public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
+public class WSConfig implements WebSocketMessageBrokerConfigurer{
 
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
-		registry.addEndpoint("/class").withSockJS();
+			registry.addEndpoint("/jenkinsTracker").withSockJS();
 		
 	}
-		
 
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry registry) {
@@ -25,4 +24,5 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 	
 	
 	
+
 }
