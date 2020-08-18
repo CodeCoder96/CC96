@@ -15,7 +15,7 @@ pipeline {
 			steps {
 				dir('ws-training') {
 					sh 'chmod +x mvnw'
-					sh './mvnw build'
+					sh './mvnw package'
 				}
 			}
 		}
