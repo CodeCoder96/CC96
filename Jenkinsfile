@@ -6,7 +6,7 @@ pipeline {
 		disableConcurrentBuilds()
 	}
 
-	trigger {
+	triggers {
 		cron('H H * * *')
 	}
 
