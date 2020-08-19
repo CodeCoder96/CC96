@@ -45,9 +45,9 @@ function taflan() {
 
 			str = xhttp.responseText;
 			
+			dashboardData = JSON.parse(xhttp.responseText);
 			
-			
-			dashboardData = str.split("},")
+			/*dashboardData = str.split("},")
 			for (i = 0; i < dashboardData.length; i++) {
 				if (i == 0) {
 					dashboardData[i] = dashboardData[i].replace("[ ", "");
@@ -62,7 +62,7 @@ function taflan() {
 				}
 				dashboardData[i] = dashboardData[i] + " }";
 				dashboardData[i] = JSON.parse(dashboardData[i]);
-			}
+			}*/
 			dashboardData = mergeSort(dashboardData);
 			dashboardData.reverse();
 			for (i = 0; i < dashboardData.length; i++) {
