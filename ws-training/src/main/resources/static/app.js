@@ -44,6 +44,9 @@ function taflan() {
 			var messageList = $('#noticeTbody');
 
 			str = xhttp.responseText;
+			
+			
+			
 			dashboardData = str.split("},")
 			for (i = 0; i < dashboardData.length; i++) {
 				if (i == 0) {
