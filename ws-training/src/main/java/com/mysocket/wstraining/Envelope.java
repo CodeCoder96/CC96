@@ -3,18 +3,18 @@ package com.mysocket.wstraining;
 //Envelope = Mektup zarfı
 
 public class Envelope {
-	private String envelope;
+	private String envelopeStr;
 	
 	public Envelope() {
 		
 	}
 
-	public Envelope(String envelope) {
-		this.envelope = envelope;
+	public Envelope(String envelopeStr) {
+		this.envelopeStr = envelopeStr;
 	}
 	
-	public String getEnvelope() {
-		return envelope;
+	public String getEnvelopeStr() {
+		return envelopeStr;
 	}
 
 

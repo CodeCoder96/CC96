@@ -1,18 +1,18 @@
 package com.mysocket.wstraining;
 
 public class Notice {
-	private String notice;
+	private String noticeStr;
 
 	public Notice(String notice) {
 		
 	}
 
-	public String getNotice() {
-		return notice;
+	public String getNoticeStr() {
+		return noticeStr;
 	}
 
-	public void setNotice(String notice) {
-		this.notice = notice;
+	public void setNoticeStr(String noticeStr) {
+		this.noticeStr = noticeStr;
 	}
 	
 	

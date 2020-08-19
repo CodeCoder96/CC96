@@ -1,50 +1,50 @@
 package com.mysocket.wstraining;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageChannel;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.socket.sockjs.transport.session.WebSocketServerSockJsSession;
-import org.springframework.web.util.HtmlUtils;
 
 import com.mysocket.wstraining.restapi.RestMainC;
 
 @Controller
 public class EnvelopeController {
 	
+	private static final String SUBSRCRIBE_CHANNEL = "/topic/jenkinsTracker";
+
+	
+	
 	@Autowired
 	private SimpMessagingTemplate template;
 	
 	@Scheduled(fixedRate = 5000)
 	public void informClients() {
-		switch(RestMainC.getNotifyValue()) {
+		
+		
+		/*switch(RestMainC.getNotifyValue()) {
 		case -1:
-			this.template.convertAndSend("/topic/jenkinsTracker", "Servis yeni başladı, Sistem ayağa kalkıyor.");
+			this.template.convertAndSend(SUBSRCRIBE_CHANNEL, "Merhaba");
 			break;
 		case 0:
-			this.template.convertAndSend("/topic/jenkinsTracker"," Değerler değişti. Yeni değerler : " + RestMainC.getJenkinsDatas());
+			this.template.convertAndSend(SUBSRCRIBE_CHANNEL," Değerler değişti. Yeni değerler : " );
 			break;
 		case 1:
-			this.template.convertAndSend("/topic/jenkinsTracker", "Değerler Aynı. Her şey düzgün çalışıyor");
+			this.template.convertAndSend(SUBSRCRIBE_CHANNEL, "Değerler Aynı. Her şey düzgün çalışıyor. Değerler : ");
 			break;
-		case 2:
-			this.template.convertAndSend("/topic/jenkinsTracker", "Henüz jenkinsten veriler çekilmedi veya jenkins verileri çekilirken hata oluştu");
+		default:
+			this.template.convertAndSend(SUBSRCRIBE_CHANNEL, "Henüz jenkinsten veriler çekilmedi veya jenkins verileri çekilirken hata oluştu");
 			break;
-		}
+		}*/
+		
 		
 	}
+
+	
+	
+
+
+	
+
 	 
-	/*@MessageMapping("/changed-values")
-	@SendTo("/topic/jenkinsTracker")
-	public Envelope envelope(Notice notice) throws Exception {
-		Thread.sleep(1000);
-		
-		return new Envelope(HtmlUtils.htmlEscape(notice.getNotice()));
-	}*/
+	
 }

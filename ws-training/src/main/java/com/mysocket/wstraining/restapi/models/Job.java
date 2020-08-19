@@ -1,14 +1,10 @@
 package com.mysocket.wstraining.restapi.models;
 
-
-
 public class Job {
 
-	
 	private String name;
-	
-	private String url;
 
+	private String url;
 
 	private String color;
 

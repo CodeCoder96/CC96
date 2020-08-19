@@ -16,10 +16,6 @@ public class JenkinsDataService {
 	private Root stableData;
 	private Root stageData;
 
-	public static JenkinsDataService getService() {
-		return service;
-	}
-
 	public Root getProdData() {
 		return prodData;
 	}
@@ -37,10 +33,12 @@ public class JenkinsDataService {
 	}
 
 	public static JenkinsDataService getInstance() {
+		
+		
 		return service;
 	}
 
-	public void startService(String id, String pass) throws Exception {
+	public void startService(String id, String pass)   {
 		RequestHandler requestHandler = Feign.builder().requestInterceptor(new BasicAuthRequestInterceptor(id, pass))
 				.decoder(new GsonDecoder()).target(RequestHandler.class, "http://localhost:2000");
 
@@ -48,6 +46,8 @@ public class JenkinsDataService {
 		prodData = requestHandler.getProdData();
 		stableData = requestHandler.getStableData();
 		stageData = requestHandler.getStageData();
+		
+		
 		
 	}
 }

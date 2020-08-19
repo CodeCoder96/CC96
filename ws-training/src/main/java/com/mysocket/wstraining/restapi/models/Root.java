@@ -15,9 +15,6 @@ public class Root {
 	
 	private List<Job> jobs;
 
-	public Root() {
-		
-	}
 	
 	public String getFullName() {
 		return fullName;

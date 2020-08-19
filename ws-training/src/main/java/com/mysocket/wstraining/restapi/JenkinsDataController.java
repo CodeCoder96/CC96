@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mysocket.wstraining.regulation.JenkinsDataSorting;
+import com.mysocket.wstraining.restapi.models.DashboardDataModel;
 import com.mysocket.wstraining.restapi.models.Root;
 
 @Configuration
@@ -13,8 +15,9 @@ import com.mysocket.wstraining.restapi.models.Root;
 public class JenkinsDataController {
 
 	@GetMapping("/api")
-	public List<Root> getRootData() {
-		return RestMainC.getJenkinsDatas();
+	public DashboardDataModel[] getRootData() {
+		return JenkinsDataSorting.gradeJob(RestMainC.getDashboardDatas());
 	}
+	
 	
 }

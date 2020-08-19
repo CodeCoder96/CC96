@@ -38,13 +38,4 @@ public class ClientNotifier {
 		return true;
 	}
 	
-	public void nofityClients() {
-		
-	}
-	
-	
-	public static String notifyClients(String notice) {
-		notice="Merhaba Dünya";
-		return notice;
-	}
 }

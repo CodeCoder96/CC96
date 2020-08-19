@@ -4,19 +4,19 @@ var dataModel = []
 
 $(document).ready(function() {
 
-	/*
-	
-		var socket = new SockJS("/jenkinsTracker");
-	
-		var stompClient = Stomp.over(socket);
-	
-		stompClient.connect({}, function() {
-			
-			stompClient.subscribe("/topic/jenkinsTracker",onMessage);
-			//messageList.append("<tr><td>"+mysubid+"</td></tr>");
-			
-		});
-		*/
+
+
+	var socket = new SockJS("/jenkinsTracker");
+
+	var stompClient = Stomp.over(socket);
+
+	stompClient.connect({}, function() {
+
+		stompClient.subscribe("/topic/jenkinsTracker", onMessage);
+
+
+	});
+
 
 });
 
@@ -31,7 +31,12 @@ $(document).ready(function() {
 		},{id: mysubid} */
 
 function onMessage(message) {
-
+	//document.write(message.body);
+	if (-1 == parseInt(message.body)) {
+		taflan(message.body);
+	} if (1 == parseInt(message.body)) {
+		document.write("Değerler aynı\n")
+	}
 	//var messageList = $('#noticeTbody');
 	//let str = message.body;
 	//getDashboardDatas();
@@ -61,49 +66,59 @@ function onMessage(message) {
 
 }
 
+if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+	taflan(0);
+}
 
-var xhttp = new XMLHttpRequest();
-xhttp.open("GET", "http://localhost:8080/api", true);
-xhttp.send();
+function taflan(notifyValue) {
+	if (0 == notifyValue) {
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("GET", "http://localhost:8080/api", true);
+		xhttp.send();
 
-xhttp.addEventListener("readystatechange", hostRequestListener, false);
+		xhttp.addEventListener("readystatechange", hostRequestListener, false);
 
-xhttp.onreadystatechange = hostRequestListener;
+		xhttp.onreadystatechange = hostRequestListener;
 
-function hostRequestListener() {
+		function hostRequestListener() {
 
-	if (xhttp.readyState == 4 && xhttp.status == 200) {
-		//document.getElementById("getDatasBtn").innerHTML = this.responseText;
-		var messageList = $('#noticeTbody');
-		
-		//messageList.append("<tr><td>" + xhttp.responseText + "</td></tr>");
-		str = xhttp.responseText;
-		dashboardData = str.split("},")
-		//messageList.append("<tr><td>" + dashboardData + "</td></tr>");
-		for (i = 0; i < dashboardData.length; i++) {
-			if (i == 0) {
-				dashboardData[i] = dashboardData[i].replace("[ ", "");
-				dashboardData[i] = dashboardData[i] + " }";
-				dashboardData[i] = JSON.parse(dashboardData[i]);
-				continue;
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+				//document.getElementById("getDatasBtn").innerHTML = this.responseText;
+				var messageList = $('#noticeTbody');
+
+				//messageList.append("<tr><td>" + xhttp.responseText + "</td></tr>");
+				str = xhttp.responseText;
+				dashboardData = str.split("},")
+				//messageList.append("<tr><td>" + dashboardData + "</td></tr>");
+				for (i = 0; i < dashboardData.length; i++) {
+					if (i == 0) {
+						dashboardData[i] = dashboardData[i].replace("[ ", "");
+						dashboardData[i] = dashboardData[i] + " }";
+						dashboardData[i] = JSON.parse(dashboardData[i]);
+						continue;
+					}
+					if (i == dashboardData.length - 1) {
+						dashboardData[i] = dashboardData[i].replace(" ]", "");
+						dashboardData[i] = JSON.parse(dashboardData[i]);
+						continue;
+					}
+					dashboardData[i] = dashboardData[i] + " }";
+					dashboardData[i] = JSON.parse(dashboardData[i]);
+				}
+				dashboardData = mergeSort(dashboardData);
+				dashboardData.reverse();
+				for (i = 0; i < dashboardData.length; i++) {
+					messageList.append("<tr><td>" + dashboardData[i].jobName + "</td><td>" + dashboardData[i].devColor + "</td><td>" + dashboardData[i].stableColor + "</td><td>" + dashboardData[i].stageColor + "</td><td>" + dashboardData[i].prodColor + "</td><td>" + dashboardData[i].score+ "</td></tr>");
+				}
+
 			}
-			if (i == dashboardData.length - 1) {
-				dashboardData[i] = dashboardData[i].replace(" ]", "");
-				dashboardData[i] = JSON.parse(dashboardData[i]);
-				continue;
-			}
-			dashboardData[i] = dashboardData[i] + " }";
-			dashboardData[i] = JSON.parse(dashboardData[i]);
+
 		}
-		dashboardData = mergeSort(dashboardData);
-		dashboardData.reverse();
-		for (i = 0; i < dashboardData.length; i++) {
-			messageList.append("<tr><td>" + dashboardData[i].jobName + "</td><td>" + dashboardData[i].devColor + "</td><td>" + dashboardData[i].stableColor + "</td><td>" + dashboardData[i].stageColor + "</td><td>" + dashboardData[i].prodColor + "</td><td>" + dashboardData[i].score + "</td></tr>");
-		}
-		
+
 	}
 
 }
+
 
 
 //ajax request atan method yaz. /api endpointine e istek atacak
@@ -120,9 +135,11 @@ function merge(left, right) {
 	let arr = [];
 
 	while (left.length && right.length) {
+
 		if (left[0].score < right[0].score) {
 			arr.push(left.shift());
-		} else {
+		}
+		else {
 			arr.push(right.shift());
 		}
 	}
@@ -142,17 +159,77 @@ function mergeSort(arr) {
 }
 
 
-/*$(document).ready(function (){
-	var messageListDash = $("#noticeTbodyaa");
+function hierarchy(dataArr) {
 
-	var socketDash = new SockJS("/init");
+	let prod = [], stage = [], stable = [], dev = [];
+	let maxProd, maxStage, maxStable, maxDev;
+	for (i = 0; i < dataArr.length; i++) {
+		prod.push(dataArr[i].prodScore);
+		stage.push(dataArr[i].stageScore);
+		stable.push(dataArr[i].stableScore);
+		dev.push(dataArr[i].devScore);
+	}
+	prod.sort();
+	stage.sort();
+	stable.sort();
+	dev.sort();
 
-	var stompClientDash = Stomp.over(socketDash);
+	maxProd = Math.max(prod);
+	maxStage = Math.max(stage);
+	maxStable = Math.max(stable);
+	maxDev = Math.max(dev);
 
-	stompClientDash.connect({},function(){
-		stompClientDash.subscribe("/dashboard/init",function(data){
-			var messageDash = data.body;
-			messageListDash.append("<tr><td>" + messageDash + "<tr><td>")
-		})
-	})
-})*/
+
+
+	minProd = Math.min(prod);
+	minStage = Math.min(stage);
+	minStable = Math.min(stable);
+	minDev = Math.min(dev);
+
+	let countProd = [maxProd], countStage = [maxStage], countStable = [maxStable], countDev = [maxDev];
+	for (i = 0; i < maxProd; i++) {
+		countProd[i] = 0;
+	}
+	for (i = 0; i < maxStage; i++) {
+		countStage[i] = 0;
+	}
+	for (i = 0; i < maxStable; i++) {
+		countStable[i] = 0;
+	}
+	for (i = 0; i < maxDev; i++) {
+		countDev[i] = 0;
+	}
+	var hiearchicalDatamodel;
+	for (i = 0; i <= countProd.length; i++) {
+		countProd[dataArr[5].prodScore]++;
+		countStage[dataArr[5].stageScore]++;
+		countStable[dataArr[5].stableScore]++;
+		countDev[dataArr[5].devScore]++;
+	}
+	let score = 0;
+	for (i = 0; i < dataArr.length; i++) {
+		for (j = 0; j < dataArr.length; j++) {
+			if (0 < countProd[prod[dataArr.length - i - 1]] && prod[dataArr.length - i - 1] == dataArr[j].prodScore) {
+				score++;
+			}
+			if (0 < countStage[stage[dataArr.length - i - 1]] && stage[dataArr.length - i - 1] == dataArr[j].stageScore) {
+				score++;
+			}
+			if (0 < countStable[stable[dataArr.length - i - 1]] && stable[dataArr.length - i - 1] == dataArr[j].stableScore) {
+				score++;
+			}
+			if (0 < countDev[dev[dataArr.length - i - 1]] && dev[dataArr.length - i - 1] == dataArr[j].devScore) {
+				score++;
+			}
+			if (4 == score) {
+				hierarhiearchicalDatamodel.push[dataArr[j]];
+				countProd[prod[dataArr.length - i - 1]]--;
+				countStage[stage[dataArr.length - i - 1]]--;
+				countStable[stable[dataArr.length - i - 1]]--;
+				countDev[dev[dataArr.length - i - 1]]--;
+				score = 0;
+			}
+		}
+	}
+	return hiearchicalDatamodel;
+}
