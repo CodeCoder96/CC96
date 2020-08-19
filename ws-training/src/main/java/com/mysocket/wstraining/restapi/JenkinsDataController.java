@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mysocket.wstraining.regulation.JenkinsDataSorting;
 import com.mysocket.wstraining.restapi.models.DashboardDataModel;
-import com.mysocket.wstraining.restapi.models.Root;
 
 @Configuration
 @RestController

@@ -7,15 +7,13 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import com.mysocket.wstraining.regulation.JenkinsDataSorting;
-import com.mysocket.wstraining.restapi.ClientNotifier;
 import com.mysocket.wstraining.restapi.RestMainC;
 
 
 @SpringBootApplication
 @EnableScheduling
 public class WsTrainingApplication {
-	
+	private static final String SUBSRCRIBE_CHANNEL = "/topic/jenkinsTracker";
 	@Autowired
 	private SimpMessagingTemplate template; 
 	
@@ -29,10 +27,9 @@ public class WsTrainingApplication {
 	public void checkData() {
 		RestMainC restApi = RestMainC.getInstance();
 		restApi.showMeData();
-		System.out.println("Check Data fonksiyonu çalıştı");
 		int toggle = RestMainC.getNotifyValue();
 		if(0==toggle && null!=this.template) {
-			this.template.convertAndSend("/topic/jenkinsTracker", RestMainC.getNotifyValue());
+			this.template.convertAndSend(SUBSRCRIBE_CHANNEL, RestMainC.getNotifyValue());
 		}
 		
 		

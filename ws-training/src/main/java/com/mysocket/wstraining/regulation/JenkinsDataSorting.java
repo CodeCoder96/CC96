@@ -6,19 +6,15 @@ public class JenkinsDataSorting {
 
 	public static DashboardDataModel[] gradeJob(DashboardDataModel[] dashboardDatas) {
 
-		String[] parentJobAndColorArray = initParentJobAndColorArr();
-		for (String str : parentJobAndColorArray) {
-			System.out.println(str);
-		}
 		double tempDevScore, tempStableScore, tempStageScore, tempProdScore;
 		for (int i = 0; i < dashboardDatas.length; i++) {
 			tempDevScore = calculate("dev", dashboardDatas[i].getDevColor());
-			tempStableScore = calculate("stable",dashboardDatas[i].getStableColor());
-			tempStageScore = calculate("stage",dashboardDatas[i].getStageColor());
-			tempProdScore = calculate("prod",dashboardDatas[i].getProdColor());
-			
-		
-			double totalScore =Math.pow(tempDevScore, 2)+Math.pow(tempStableScore, 2)+Math.pow(tempStageScore, 2)+Math.pow(tempProdScore, 2);
+			tempStableScore = calculate("stable", dashboardDatas[i].getStableColor());
+			tempStageScore = calculate("stage", dashboardDatas[i].getStageColor());
+			tempProdScore = calculate("prod", dashboardDatas[i].getProdColor());
+
+			double totalScore = Math.pow(tempDevScore, 2) + Math.pow(tempStableScore, 2) + Math.pow(tempStageScore, 2)
+					+ Math.pow(tempProdScore, 2);
 			dashboardDatas[i].setScore(totalScore);
 
 		}
@@ -26,53 +22,23 @@ public class JenkinsDataSorting {
 		return dashboardDatas;
 	}
 
-	private static int calculateScore(String parentJobAndColor, String[] pJobAndColorArr) {
-
-		for (int i = 0; i < pJobAndColorArr.length; i++) {
-			if (parentJobAndColor.equals(pJobAndColorArr[i])) {
-				return (i + 1);
-			}
-		}
-
-		return -1;
-	}
-
-	private static String[] initParentJobAndColorArr() {
-		String[] arr = new String[20];
-		String[] colors = new String[] { "blue", "yellow", "red", "aborted", "notbuilt" };
-		String[] parentJobName = new String[] { "dev", "stable", "stage", "prod" };
-		int countOfColors = colors.length, holdCounterPosition = 4, matched = 0, arrLen = 0;
-
-		for (int i = 0; i < countOfColors; i++) {
-
-			arr[arrLen] = parentJobName[matched].concat(colors[i]);
-			if (holdCounterPosition > matched) {
-				i--;
-				matched++;
-			}
-			if (holdCounterPosition == matched) {
-				matched = 0;
-				i++;
-			}
-			arrLen++;
-		}
-
-		return arr;
-	}
-
-	private static double calculate(String parentJobName,String color) {
+	private static double calculate(String parentJobName, String color) {
 		double score = 0;
 		switch (color) {
+		case "notbuilt":
+			score += 2.5;
+			break;
+		case "aborted":
+			score += 2.4;
+			break;
 		case "red":
 			score += 2.3;
 			break;
 		case "yellow":
 			score += 2.2;
 			break;
-		case "blue":
-			score += 2.1;
-			break;
 		default:
+			score += 2.1;
 			break;
 		}
 

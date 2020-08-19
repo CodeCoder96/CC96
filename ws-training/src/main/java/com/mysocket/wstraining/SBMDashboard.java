@@ -7,9 +7,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
 
-import com.mysocket.wstraining.regulation.JenkinsDataSorting;
 import com.mysocket.wstraining.restapi.RestMainC;
-import com.mysocket.wstraining.restapi.models.DashboardDataModel;
 
 @Component
 public class SBMDashboard implements CommandLineRunner {

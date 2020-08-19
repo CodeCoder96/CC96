@@ -1,10 +1,8 @@
 package com.mysocket.wstraining.regulation;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import com.mysocket.wstraining.SBMDashboard;
+import java.util.List;
+
 import com.mysocket.wstraining.restapi.models.DashboardDataModel;
 import com.mysocket.wstraining.restapi.models.Job;
 
@@ -14,8 +12,7 @@ public class ManupilateDataBeforeMonitoring {
 	public static final int STABLE_COLOR = 1;
 	public static final int STAGE_COLOR = 2;
 	public static final int PROD_COLOR = 3;
-	
-	private static final int PARENT_JOB_COUNT_AND_COLORS_SCORE = 5;
+
 
 	private static ManupilateDataBeforeMonitoring dataBeforeMonitoring = null;
 	private static DashboardDataModel[] model;

@@ -13,14 +13,13 @@ public class WSConfig implements WebSocketMessageBrokerConfigurer{
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
 			registry.addEndpoint("/jenkinsTracker").withSockJS();
-			//registry.addEndpoint("/init").withSockJS();
+			
 		
 	}
 
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry registry) {
 		registry.enableSimpleBroker("/topic");
-		//registry.enableSimpleBroker("/dashboard");
 		registry.setApplicationDestinationPrefixes("/app");
 		
 	}
