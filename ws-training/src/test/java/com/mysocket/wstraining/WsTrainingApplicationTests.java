@@ -16,21 +16,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class WsTrainingApplicationTests {
 
-	
-	
-	
-	
 	@Test
 	void contextLoads() throws Exception {
 		
 		Random rndm = new Random();
 		switch (rndm.nextInt(1)) {
 		case 1:
-			Assert.assertTrue(true);
+			Assert.assertTrue(4!=2+1);
 			break;
 
 		default:
-			Assert.fail();
+			Assert.assertTrue(4==2+1);
 			break;
 		}
 		
