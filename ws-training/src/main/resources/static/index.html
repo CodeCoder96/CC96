@@ -1,29 +1,21 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <title>Taflan</title>
- <script src="/webjars/jquery/jquery.min.js"></script>
-    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
-    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
-    <script src="/app.js">
-		
-	</script>
+<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/webjars/font-awesome/css/all.min.css" />
+<link rel="stylesheet" href="/app.css" />
 </head>
 <body>
-
-
-
-	
-<div id="tabloDiv">
-
-</div>
-	
-	<div align="center" >
-		<h3 align="center">Taflan (SBM Dashboard)</h3>
-		<table id="notifyTable" border="1">
-			<tbody id="noticeTbody"></tbody>
-		</table>
+	<div class="container-fluid">
+		<div id="projects" class="row"></div>
 	</div>
+	<script src="/webjars/jquery/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+	<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+	<script src="/app.js" type="module"></script>
 </body>
 </html>

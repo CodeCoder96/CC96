@@ -1,8 +1,23 @@
-var dataModel = []
+import {html, render} from '/webjars/lit-html/lit-html.js'
+import {repeat} from '/webjars/lit-html/directives/repeat.js'
 
-
+const projectTemplate = (projects) => html`
+	${repeat(projects, (project, index) => html`
+		<div class="col-xl-6">
+			<div class="row">
+				<div class="col-lg-6 buttonSquareColumn "><div class="buttonSquare ${project.devColor ? project.devColor : ''} "><i class="fa fa-cog"></i><span>${project.jobName}</span></div></div>
+				<div class="col-sm-4 col-lg-2 buttonSquareColumn "><div class="buttonSquare ${project.stableColor ? project.stableColor : ''} "><i class="fa fa-code-branch"></i><span>stable</span></div></div>
+				<div class="col-sm-4 col-lg-2 buttonSquareColumn "><div class="buttonSquare ${project.stageColor ? project.stageColor : ''} "><i class="fa fa-code-branch"></i><span>stage</span></div></div>
+				<div class="col-sm-4 col-lg-2 buttonSquareColumn "><div class="buttonSquare ${project.prodColor ? project.prodColor : ''} "><i class="fa fa-code-branch"></i><span>prod</span></div></div>
+			</div>
+		</div>
+	`)}
+`;
 
 $(document).ready(function() {
+
+	taflan()
+
 	var socket = new SockJS("/jenkinsTracker");
 	var stompClient = Stomp.over(socket);
 
@@ -43,9 +58,9 @@ function taflan() {
 		if (xhttp.readyState == 4 && xhttp.status == 200) {
 			var messageList = $('#noticeTbody');
 
-			str = xhttp.responseText;
+			// str = xhttp.responseText;
 			
-			dashboardData = JSON.parse(xhttp.responseText);
+			var dashboardData = JSON.parse(xhttp.responseText);
 			
 			/*dashboardData = str.split("},")
 			for (i = 0; i < dashboardData.length; i++) {
@@ -65,10 +80,7 @@ function taflan() {
 			}*/
 			dashboardData = mergeSort(dashboardData);
 			dashboardData.reverse();
-			for (i = 0; i < dashboardData.length; i++) {
-				messageList.append("<tr><td>" + dashboardData[i].jobName + "</td><td>" + dashboardData[i].devColor + "</td><td>" + dashboardData[i].stableColor + "</td><td>" + dashboardData[i].stageColor + "</td><td>" + dashboardData[i].prodColor + "</td></tr>");
-			}
-
+			render(projectTemplate(dashboardData), document.getElementById('projects'));
 		}
 
 	}
