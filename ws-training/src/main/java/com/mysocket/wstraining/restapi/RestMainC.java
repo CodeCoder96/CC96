@@ -14,20 +14,12 @@ public class RestMainC {
 	private static List<Root> jenkinsDatas;
 	private static int notifyValue = 2;
 
-	private static RestMainC restMainC;
 
 	private RestMainC() {
 
 	}
 
-	public static RestMainC getInstance() {
-		if (null == restMainC) {
-			restMainC = new RestMainC();
-		}
-		return restMainC;
-	}
-
-	public void showMeData() {
+	public static void showMeData() {
 
 		JenkinsDataService service = JenkinsDataService.getInstance();
 		service.startService(ID, PASS);

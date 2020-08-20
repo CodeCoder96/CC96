@@ -5,20 +5,21 @@ import com.mysocket.wstraining.restapi.models.DashboardDataModel;
 public class JenkinsDataSorting {
 
 	public static DashboardDataModel[] gradeJob(DashboardDataModel[] dashboardDatas) {
+		if(null!=dashboardDatas) {
+			double tempDevScore, tempStableScore, tempStageScore, tempProdScore;
+			for (int i = 0; i < dashboardDatas.length; i++) {
+				tempDevScore = calculate("dev", dashboardDatas[i].getDevColor());
+				tempStableScore = calculate("stable", dashboardDatas[i].getStableColor());
+				tempStageScore = calculate("stage", dashboardDatas[i].getStageColor());
+				tempProdScore = calculate("prod", dashboardDatas[i].getProdColor());
 
-		double tempDevScore, tempStableScore, tempStageScore, tempProdScore;
-		for (int i = 0; i < dashboardDatas.length; i++) {
-			tempDevScore = calculate("dev", dashboardDatas[i].getDevColor());
-			tempStableScore = calculate("stable", dashboardDatas[i].getStableColor());
-			tempStageScore = calculate("stage", dashboardDatas[i].getStageColor());
-			tempProdScore = calculate("prod", dashboardDatas[i].getProdColor());
+				double totalScore = Math.pow(tempDevScore, 2) + Math.pow(tempStableScore, 2) + Math.pow(tempStageScore, 2)
+						+ Math.pow(tempProdScore, 2);
+				dashboardDatas[i].setScore(totalScore);
 
-			double totalScore = Math.pow(tempDevScore, 2) + Math.pow(tempStableScore, 2) + Math.pow(tempStageScore, 2)
-					+ Math.pow(tempProdScore, 2);
-			dashboardDatas[i].setScore(totalScore);
+			}
 
 		}
-
 		return dashboardDatas;
 	}
 

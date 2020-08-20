@@ -9,7 +9,7 @@ import feign.gson.GsonDecoder;
 
 public class JenkinsDataService {
 
-	private static final JenkinsDataService service = new JenkinsDataService();
+	private static JenkinsDataService service;
 
 	private Root devData;
 	private Root prodData;
@@ -33,7 +33,9 @@ public class JenkinsDataService {
 	}
 
 	public static JenkinsDataService getInstance() {
-		
+		if(null==service) {
+			service = new JenkinsDataService();
+		}
 		
 		return service;
 	}

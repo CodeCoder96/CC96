@@ -18,27 +18,16 @@ public class WsTrainingApplication {
 	private SimpMessagingTemplate template; 
 	
 	public static void main(String[] args) throws InterruptedException {
-		
 		SpringApplication.run(WsTrainingApplication.class, args);
-		
 	}
 	
 	@Scheduled(fixedRate = 5000)
 	public void checkData() {
-		RestMainC restApi = RestMainC.getInstance();
-		restApi.showMeData();
+		RestMainC.showMeData();
+		
 		int toggle = RestMainC.getNotifyValue();
 		if(0==toggle && null!=this.template) {
 			this.template.convertAndSend(SUBSRCRIBE_CHANNEL, RestMainC.getNotifyValue());
 		}
-		
-		
-	
-		
-		
-		
 	}
-	
-	
-	
 }
