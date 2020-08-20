@@ -41,8 +41,8 @@ public class ManupilateDataBeforeMonitoring {
 			model[i] = new DashboardDataModel(biggestJob.get(i).getName(),
 							getColor(biggestJob.get(i).getName(),devJob),
 							getColor(biggestJob.get(i).getName(),stableJob),
-							getColor(biggestJob.get(i).getName(), stageJob),
-							getColor(biggestJob.get(i).getName(), prodJob),0);
+							getColor(biggestJob.get(i).getName(),stageJob),
+							getColor(biggestJob.get(i).getName(),prodJob),0);
 		}
 		
 		return model;
@@ -54,7 +54,7 @@ public class ManupilateDataBeforeMonitoring {
 				return job.getColor();
 			}
 		}
-		return "Bu job un ilgili parent da verisi bulunmamaktadır";
+		return "notbuilt";
 	}
 
 	private List<Job> getBiggestSizeList(List<Job> devJob, List<Job> prodJob, List<Job> stableJob, List<Job> stageJob) {

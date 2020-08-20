@@ -16,8 +16,6 @@ const projectTemplate = (projects) => html`
 
 $(document).ready(function() {
 
-	taflan()
-
 	var socket = new SockJS("/jenkinsTracker");
 	var stompClient = Stomp.over(socket);
 
@@ -58,26 +56,10 @@ function taflan() {
 		if (xhttp.readyState == 4 && xhttp.status == 200) {
 			var messageList = $('#noticeTbody');
 
-			// str = xhttp.responseText;
 			
 			var dashboardData = JSON.parse(xhttp.responseText);
 			
-			/*dashboardData = str.split("},")
-			for (i = 0; i < dashboardData.length; i++) {
-				if (i == 0) {
-					dashboardData[i] = dashboardData[i].replace("[ ", "");
-					dashboardData[i] = dashboardData[i] + " }";
-					dashboardData[i] = JSON.parse(dashboardData[i]);
-					continue;
-				}
-				if (i == dashboardData.length - 1) {
-					dashboardData[i] = dashboardData[i].replace(" ]", "");
-					dashboardData[i] = JSON.parse(dashboardData[i]);
-					continue;
-				}
-				dashboardData[i] = dashboardData[i] + " }";
-				dashboardData[i] = JSON.parse(dashboardData[i]);
-			}*/
+
 			dashboardData = mergeSort(dashboardData);
 			dashboardData.reverse();
 			render(projectTemplate(dashboardData), document.getElementById('projects'));

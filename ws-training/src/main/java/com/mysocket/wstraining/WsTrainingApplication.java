@@ -27,6 +27,7 @@ public class WsTrainingApplication {
 		
 		int toggle = RestMainC.getNotifyValue();
 		if(0==toggle && null!=this.template) {
+			System.out.println("değerler değişti");
 			this.template.convertAndSend(SUBSRCRIBE_CHANNEL, RestMainC.getNotifyValue());
 		}
 	}
