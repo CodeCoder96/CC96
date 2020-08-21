@@ -15,7 +15,10 @@ pipeline {
 			steps {
 				dir('ws-training') {
 					sh 'chmod +x mvnw'
-					sh './mvnw package'
+					catchError{
+						sh './mvnw package'
+					}
+					
 				}
 			}
 		}
