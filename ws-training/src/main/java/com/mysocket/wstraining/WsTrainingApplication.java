@@ -21,7 +21,8 @@ public class WsTrainingApplication {
 		SpringApplication.run(WsTrainingApplication.class, args);
 	}
 	
-	@Scheduled(fixedRate = 5000)
+	
+	@Scheduled(initialDelay = 5000,fixedRate = 5000)
 	public void checkData() {
 		RestMainC.showMeData();
 		
