@@ -19,11 +19,6 @@ pipeline {
 				}
 			}
 		}
-		stage('Test'){
-		steps {
-				sh './gradlew check'	
-			}
-		}
 	}
 	post {
 		always {
