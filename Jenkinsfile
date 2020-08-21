@@ -19,5 +19,15 @@ pipeline {
 				}
 			}
 		}
+		stage('Test'){
+		steps {
+				sh './gradlew check'	
+			}
+		}
+	}
+	post {
+		always {
+			junit 'ws-training/target/surefire-reports/*/.xml'
+		}
 	}
 }
