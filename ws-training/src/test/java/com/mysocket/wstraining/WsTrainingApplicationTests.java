@@ -2,7 +2,6 @@ package com.mysocket.wstraining;
 
 
 
-import static org.junit.Assert.fail;
 
 import java.util.Random;
 

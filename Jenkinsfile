@@ -22,11 +22,10 @@ pipeline {
 				}
 			}
 		}
-		post {
+	}
+	post {
 		always {
 			junit 'ws-training/target/surefire-reports/**/*.xml'
 		}
 	}
-	}
-	
 }
