@@ -39,6 +39,10 @@ if (performance.navigation.type == performance.navigation.TYPE_NAVIGATE) {
 	taflan();
 }
 
+if(performance.navigation.type == performance.navigation.TYPE_RELOAD){
+	taflan();
+}
+
 
 function taflan() {
 
@@ -58,10 +62,10 @@ function taflan() {
 
 			
 			var dashboardData = JSON.parse(xhttp.responseText);
-			
+		
 
-			dashboardData = mergeSort(dashboardData);
-			dashboardData.reverse();
+			/*dashboardData = mergeSort(dashboardData);
+			dashboardData.reverse();*/
 			render(projectTemplate(dashboardData), document.getElementById('projects'));
 		}
 
@@ -98,6 +102,5 @@ function mergeSort(arr) {
 
 	return merge(mergeSort(left), mergeSort(right));
 }
-
 
 

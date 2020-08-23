@@ -7,7 +7,9 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import com.mysocket.wstraining.regulation.deneme;
 import com.mysocket.wstraining.restapi.RestMainC;
+import com.mysocket.wstraining.restapi.models.DashboardDataModel;
 
 
 @SpringBootApplication
@@ -19,10 +21,11 @@ public class WsTrainingApplication {
 	
 	public static void main(String[] args) throws InterruptedException {
 		SpringApplication.run(WsTrainingApplication.class, args);
+		
 	}
 	
 	
-	@Scheduled(initialDelay = 5000,fixedRate = 5000)
+	@Scheduled(fixedRate = 5000)
 	public void checkData() {
 		RestMainC.showMeData();
 		
