@@ -64,8 +64,8 @@ function taflan() {
 			var dashboardData = JSON.parse(xhttp.responseText);
 		
 
-			/*dashboardData = mergeSort(dashboardData);
-			dashboardData.reverse();*/
+			dashboardData = mergeSort(dashboardData);
+			dashboardData.reverse();
 			render(projectTemplate(dashboardData), document.getElementById('projects'));
 		}
 

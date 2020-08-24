@@ -1,11 +1,9 @@
 package com.mysocket.wstraining.regulation;
 
-import java.awt.SecondaryLoop;
-import java.util.List;
 
 import com.mysocket.wstraining.restapi.models.DashboardDataModel;
 
-public class deneme {
+public class JenkinsDataModelConfig {
 
 	
 	public static DashboardDataModel[] getModels(DashboardDataModel[] dashboardDatas) {
@@ -25,7 +23,7 @@ public class deneme {
 			}
 				
 		}
-		dashboardDatas = sortTheModel(dashboardDatas);
+		
 		
 		return dashboardDatas;
 	}
@@ -91,18 +89,5 @@ public class deneme {
 		return -400;
 	}
 
-	private static DashboardDataModel[] sortTheModel(DashboardDataModel[] model) {
-		DashboardDataModel temp = null;
-		for(int i=0;i<model.length;i++) {
-			for(int j=i+1;j<model.length;j++) {
-				if(model[j].getScore()>model[i].getScore()) {
-					temp=model[i];
-					model[i]=model[j];
-					model[j]=temp;
-				}
-			}
-		}
-		return model;
-	}
 	
 }

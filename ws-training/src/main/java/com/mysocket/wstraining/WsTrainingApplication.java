@@ -7,7 +7,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import com.mysocket.wstraining.regulation.deneme;
+import com.mysocket.wstraining.regulation.JenkinsDataModelConfig;
 import com.mysocket.wstraining.restapi.RestMainC;
 import com.mysocket.wstraining.restapi.models.DashboardDataModel;
 
