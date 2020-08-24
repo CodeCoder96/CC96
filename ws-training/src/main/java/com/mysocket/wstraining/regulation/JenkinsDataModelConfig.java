@@ -41,12 +41,16 @@ public class JenkinsDataModelConfig {
 	private static double pickColor(String color) {
 		switch (color) {
 		case "notbuilt":
+		case "notbuilt_anime":
 			return NOTBUILT_SCORE;
 		case "aborted":
+		case "aborted_anime":
 			return ABORTED_SCORE;
 		case "red":
+		case "red_anime":
 			return RED_SCORE;
 		case "yellow":
+		case "yellow_anime":
 			return YELLOW_SCORE;
 		default:
 			return BLUE_SCORE;
