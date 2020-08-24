@@ -21,12 +21,12 @@ class WsTrainingApplicationTests {
 		Random rndm = new Random();
 		switch (rndm.nextInt(10)) {
 		case 1:
-			Assert.assertTrue(4!=2+1);
+			Assert.assertTrue(4==2+1);
 			break;
 
 		default:
 			
-			Assert.assertTrue(4==2+1);
+			Assert.assertTrue(4!=2+1);
 			break;
 		}
 		
