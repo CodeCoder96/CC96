@@ -19,7 +19,7 @@ class WsTrainingApplicationTests {
 	void contextLoads() throws Exception {
 		
 		Random rndm = new Random();
-		switch (rndm.nextInt(2)) {
+		switch (rndm.nextInt(10)) {
 		case 1:
 			Assert.assertTrue(4!=2+1);
 			break;
