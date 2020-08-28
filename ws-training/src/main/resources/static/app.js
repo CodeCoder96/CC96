@@ -58,7 +58,7 @@ function taflan() {
 	function hostRequestListener() {
 
 		if (xhttp.readyState == 4 && xhttp.status == 200) {
-			var messageList = $('#noticeTbody');
+		
 
 			
 			var dashboardData = JSON.parse(xhttp.responseText);
